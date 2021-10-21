@@ -1,23 +1,25 @@
-# react-app
-A react based application
+# Scope and Planning
 
-This project will showcase skills in:
-- Typescript or regular Java Script
-- DevOps life cycle.
-- CSS3, HTML5 and JS ES6+
-- Front End Web Development using React with the Next JS Framework
-- Designing React UI Components using Tailwind CSS and Styled Components
-- Documenting UI Components using Storybook and JS Docs
-- Backend Web Development
-- Using GraphQL to sort map and structure data.
-- Working with Authentication Frameworks
-- Working with CMS frameworks like Strapi
-- Working with a wide range of database types like Relational using an ORM like Prisma
-- Using Cypress to Test UI Functionality
-- Safe and secure ways of operating and handling customer data.
-- Dealing with and handling cyber security threats.
-- Using JEST to test business logic
-- Using Database technology like MySQL, Postgres SQL and SQLite
+This application will involve communicating customer data over the backend and personilzing the user experience.  
+
+## The Stack
+
+- Node JS ES6+ Typescript/Javascript
+- Next JS and React using Tailwind ( Styled Components? )
+- Prisma ( PostgreSQL, MySQL, SQL Server, and SQLite )
+
+## Extras
+- Storybook and JSDocs
+- GraphQL
+- Cypress for UI and E2E testing
+- JEST for testing buisiness logic. [(Consider following OWASP guidlines)](https://kennel209.gitbooks.io/owasp-testing-guide-v4/content/en/web_application_security_testing/business_logic_testing.html)
+
+## Priorities
+
+Secure and safe ways of handling user data.
+
+## The DevOps life cycle
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
