@@ -6,3 +6,4 @@ Branch prefixes:
 |`d/`| Documentation
 |`h/`| Hotfix
 |`f/`| Feature
+|`r/`| Rework
