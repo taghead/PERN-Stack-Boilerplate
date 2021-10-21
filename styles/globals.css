@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+// Add Tailwind's @apply styles here
+@tailwind utilities;
+// Add other global styles below
+
 html,
 body {
   padding: 0;
