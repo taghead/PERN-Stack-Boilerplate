@@ -1,5 +1,10 @@
 # Development Guide
 
+The required dependencies for this project are:
+- NodeJS ( initialized with v12.18.3 )
+- Docker ( tested with Docker version 20.10.8 )
+- Docker Compose ( tested with docker-compose version 1.29.2 )
+
 Install dependencies by running `npm install` 
 
 Run the development server by running `npm run dev`
@@ -179,7 +184,32 @@ datasource db {
 
 #### Running PostgreSQL in Docker
 
-Create [/docker-compose.yml](/docker-compose.yml)
+Create [/docker-compose.yml](/docker-compose.yml) with the following
+
+```yml
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${DATABASE_NAME}"
+      POSTGRES_USER: "${DATABASE_SUPERUSER_USER}"
+      POSTGRES_PASSWORD: "${DATABASE_SUPERUSER_PASSWORD}"
+```
+
+Overwrite [/.env](/.env) with the following
+```bash
+DATABASE_NAME="superawesomename"
+DATABASE_SUPERUSER_USER="superawesomeuser"
+DATABASE_SUPERUSER_PASSWORD="supersecretpass"
+
+DATABASE_URL="postgresql://superawesomeuser:supersecretpass@localhost:5432/superawesomename?schema=public"
+```
+
+Run `docker-compose up -d`
 
 .....Create schema stuff
 
