@@ -70,6 +70,7 @@ cd next-app
 Generate scaffolding and boilerplate for next and react
 ```bash
 npx create-next-app . --use-npm -e with-typescript
+npm install --save-dev typescript@latest
 ```
 
 
@@ -206,6 +207,89 @@ Run `npx prisma migrate dev` to migrate your Prisma schema into postgres;
 
 Run `npx prisma generate` to generate the Prisma Client. You can then start querying your database.
 
+### Integrating Graphql and Nexus schemas into Next.js
+
+Install modules
+```
+npm install --save apollo-server-micro@^2 graphql micro nexus
+```
+
+Create [/pages/api/graphql.ts](/pages/api/graphql.ts) with the following 
+```js
+import { ApolloServer } from 'apollo-server-micro';
+
+// we'll create these in a second!
+import { schema } from '../../graphql/schema';
+import { createContext } from './../../graphql/context';
+
+const apolloServer = new ApolloServer({
+  context: createContext,
+  schema,
+  tracing: process.env.NODE_ENV === 'development'
+});
+
+export const config = {
+  api: {
+    bodyParser: false
+  }
+};
+
+export default apolloServer.createHandler({
+  path: '/api/graphql'
+});
+```
+
+Create [/graphql/schema.ts](/graphql/schema.ts) with the following 
+
+```javascript
+import { objectType, queryType, mutationType, makeSchema } from '@nexus/schema';
+import { nexusPrisma } from 'nexus-plugin-prisma';
+import path from 'path';
+
+const Query = queryType({
+  definition(t) {
+    t.string('hello', { resolve: () => 'hello world' });
+  }
+});
+
+export const schema = makeSchema({
+  types: [Query],
+  plugins: [nexusPrisma({ experimentalCRUD: true })],
+  outputs: {
+    typegen: path.join(process.cwd(), 'generated', 'nexus-typegen.ts'),
+    schema: path.join(process.cwd(), 'generated', 'schema.graphql')
+  },
+  typegenAutoConfig: {
+    contextType: 'Context.Context',
+    sources: [
+      {
+        source: '@prisma/client',
+        alias: 'prisma'
+      },
+      {
+        source: path.join(process.cwd(), 'graphql', 'context.ts'),
+        alias: 'Context'
+      }
+    ]
+  }
+});
+```
+
+Create [/graphql/context.ts](/graphql/context.ts) with the following 
+
+```javascript
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+export interface Context {
+  prisma: PrismaClient;
+}
+
+export function createContext(): Context {
+  return { prisma };
+}
+```
 
 ### Tailwind
 
