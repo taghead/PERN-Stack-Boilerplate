@@ -4,7 +4,6 @@ The required dependencies for this project are:
 - [NodeJS](https://nodejs.org/en/blog/release/v12.13.0/) ( initialized with v12.18.3 )
 - [Docker](https://docs.docker.com/engine/install/) ( tested with Docker version 20.10.8 )
 - [Docker Compose](https://docs.docker.com/compose/install/) ( tested with docker-compose version 1.29.2 )
-- [PostgresSQL](https://www.postgresql.org/download/) ( pgAdmin4 and [Command Line Tools](https://www.postgresql.org/docs/current/app-psql.html) for the bare minimum installation required. )
 - Make
   - Make for Mac: 
     - `brew install make` 
@@ -14,6 +13,7 @@ The required dependencies for this project are:
   - Make for Windows: 
     - [GNUWIN32 Installer](http://gnuwin32.sourceforge.net/packages/make.htm) use the Complete package, except sources ( for automation )
     - `chocho install make` refer to [Chocolatey](https://community.chocolatey.org/packages/make)
+<!-- - [PostgresSQL](https://www.postgresql.org/download/) ( pgAdmin4 and [Command Line Tools](https://www.postgresql.org/docs/current/app-psql.html) for the bare minimum installation required. ) -->
 
 Install dependencies by running `npm install` 
 
@@ -250,7 +250,9 @@ enum Role {
 }
 ```
 
-Run `npx prisma db pull` to turn your database schema into a Prisma schema.
+Run `npx prisma migrate dev` to migrate your Prisma schema into postgres;
+
+<!-- Run `npx prisma db pull` to turn your database schema into a Prisma schema. -->
 
 Run `npx prisma generate` to generate the Prisma Client. You can then start querying your database.
 
@@ -264,4 +266,5 @@ Run `npx prisma generate` to generate the Prisma Client. You can then start quer
 - [Prisma - Getting Started](https://pris.ly/d/getting-started)
 - [Prisma - Schemas](https://www.prisma.io/docs/concepts/components/prisma-schema#using-environment-variables)
 - [Prisma - Connection URLs Options](https://pris.ly/d/connection-strings)
+- [Prisma - Api](https://www.section.io/engineering-education/api-with-prisma-and-nodejs/#:~:text=%20Prerequisites%20%201%20Step%201%3A%20Setting%20up,Step%205%3A%20Creating%20a%20Rest%20API%20More%20)
 - [PostgreSQL - Dockerhub](https://hub.docker.com/_/postgres/)

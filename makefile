@@ -1,11 +1,10 @@
+all:
+	timeout 0
+
 docker-up:
 	docker-compose up -d
-	timeout 20
-	psql postgresql://superawesomeuser:supersecretpass@localhost:5432/superawesomename
-	CREATE TABLE User
-	CREATE TABLE Post
-	CREATE TABLE Role
-
+	timeout 4
+	npx prisma migrate dev
 
 docker-down:
 	docker-compose down
