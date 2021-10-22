@@ -261,7 +261,41 @@ Create an empty file [/tsconfig.json](/tsconfig.json)
 
 Add the typescript modules 
 ```
-npm install --save-dev typescript @types/react @types/node
+npm install --save-dev typescript @types/react @types/node ts-node
+```
+
+### Adding Prisma database seeding
+
+Append [/package.json](/package.json) with the following
+```json
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  }
+```
+
+Create [/prisma/seed.ts](//prisma/seed.ts) with the following
+```typescript
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
+async function main() {
+  const johndoe = await prisma.user.create({
+    data: {
+      name: "John Doe",
+      email: "johndoe@jd.com"
+    },
+  });
+  console.log({ johndoe });
+}
+
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
 ```
 
 ## References
