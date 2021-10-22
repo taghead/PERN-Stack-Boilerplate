@@ -177,6 +177,15 @@ datasource db {
 }
 ```
 
+#### Running PostgreSQL in Docker
+
+Create [/docker-compose.yml](/docker-compose.yml)
+
+.....Create schema stuff
+
+Run `npx prisma db pull` to turn your database schema into a Prisma schema.
+
+Run `npx prisma generate` to generate the Prisma Client. You can then start querying your database.
 
 ## References
 
@@ -186,3 +195,6 @@ datasource db {
 - [Tailwind Styled Components](https://medium.com/@dana.rocha/setting-up-a-design-system-in-storybook-with-react-styled-components-tailwind-and-typescript-in-697a99680ddf#:~:text=To%20use%20Tailwind%20together%20with%20Styled-Components%2C%20we%20will,initialise%20tailwind.config.js%20with%20the%20command%3A%20npx%20tailwind%20init)
 - [Prima Client](https://dev.to/aryanjnyc/introduction-to-prisma-with-next-js-1l0#:~:text=%20Introduction%20to%20Prisma%20with%20Next.js%20%201,a%20Data%20Model.%20For%20simplicity%27s%20sake...%20More%20)
 - [Prisma - Getting Started](https://pris.ly/d/getting-started)
+- [Prisma - Schemas](https://www.prisma.io/docs/concepts/components/prisma-schema#using-environment-variables)
+- [Prisma - Connection URLs Options](https://pris.ly/d/connection-strings)
+- [PostgresQL - Dockerhub](https://hub.docker.com/_/postgres/)
