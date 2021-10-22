@@ -1,5 +1,8 @@
 # Development Guide
 
+Install dependencies by running `npm install` 
+
+Run the development server by running `npm run dev`
 
 ## Initial Generation
 These commands are for documentation and do not need to be repeated
@@ -30,9 +33,9 @@ Modify [/styles/global.css](/styles/global.css) and add
 ```css
 @tailwind base;
 @tailwind components;
-// Add Tailwind's @apply styles here
+
 @tailwind utilities;
-// Add other global styles below
+
 html {
   ...
 }
@@ -42,23 +45,31 @@ body {
 ```
 
 #### Tailwind styled-components
-```
+```bash
 npm install tailwind.macro@next --save
 npm install styled-components --save
 ```
 
 Create [/babel-plugin-macros.config.js](/babel-plugin-macros.config.js) with the following content
-```
+```javascript
 module.exports = {
   tailwind: {
-    config: './src/tailwind.config.js',
+    config: './tailwind.config.js',
     styled: 'styled-components/macro',
   },
 };
 ```
 
-> Usage Example
-> ```
+Create [/.babelrc](/.babelrc) with the following
+```json
+{
+    "presets": ["next/babel"],
+    "plugins": ["macros"]
+}
+```
+
+> And you are good to go. Here is a example of creating a page using tailwind styled components.
+> ```javascript
 > 
 > // pages/test.js
 > import React from "react"
