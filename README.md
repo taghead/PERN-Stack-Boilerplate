@@ -6,7 +6,7 @@ This application will involve communicating customer data over the backend and p
 ## The Stack
 
 - Node JS ES6+ Typescript/Javascript
-- Next JS and React using Tailwind ( Styled Components? )
+- Next JS and React using Tailwind with Styled Components
 - Prisma ( PostgreSQL, MySQL, SQL Server, and SQLite )
 
 ## Extras

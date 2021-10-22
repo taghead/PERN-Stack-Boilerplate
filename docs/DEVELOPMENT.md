@@ -4,6 +4,42 @@ Install dependencies by running `npm install`
 
 Run the development server by running `npm run dev`
 
+## Adding a new page
+To add an additional page simply create an additional javascript file in [/pages](/pages).
+
+When the file is created consider the name to be the url route.
+
+Lets assume you make the file [pages/example.test.js](pages/example.test.js).
+
+> Here is a example of creating a page using tailwind styled components.
+> ```javascript
+> 
+> import React from "react"
+> import styled from "styled-components/macro"
+> import tw from "tailwind.macro"
+> 
+> // styles
+> const Header = styled.header`
+>   ${tw`bg-black min-h-screen flex flex-col items-center justify-center text-xl text-white`};
+> `
+> 
+> const Test = () => (
+>   <div css={tw`text-center`}>
+>     <Header>
+>       <p css={tw`text-blue-300`}>
+>         Using <code>Tailwind</code> and <code>styled-components</code> together.
+>       </p>
+>     </Header>
+>   </div>
+> )
+> 
+> export default Test
+> ```
+>
+> After creating the file run `npm run dev` and navigate to http://localhost:3000/example.test
+
+
+
 ## Initial Generation
 These commands are for documentation and do not need to be repeated
 
@@ -67,34 +103,6 @@ Create [/.babelrc](/.babelrc) with the following
     "plugins": ["macros"]
 }
 ```
-
-> And you are good to go. Here is a example of creating a page using tailwind styled components.
-> ```javascript
-> 
-> // pages/test.js
-> import React from "react"
-> import styled from "styled-components/macro"
-> import tw from "tailwind.macro"
-> 
-> // styles
-> const Header = styled.header`
->   ${tw`bg-black min-h-screen flex flex-col items-center justify-center text-xl text-white`};
-> `
-> 
-> const Test = () => (
->   <div css={tw`text-center`}>
->     <Header>
->       <p css={tw`text-blue-300`}>
->         Using <code>Tailwind</code> and <code>styled-components</code> together.
->       </p>
->     </Header>
->   </div>
-> )
-> 
-> export default Test
-> ```
-
-
 ## References
 
 
