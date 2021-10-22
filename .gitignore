@@ -1,37 +1,38 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
+!.vscode/launch.json.default
 *.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env.local
+*.tsbuildinfo
+*tmp.db
+.DS_Store
+.env*
 .env.development.local
-.env.test.local
+.env.local
 .env.production.local
-
-# vercel
+.env.test.local
+.eslintcache
+.pnp.js
+.pnpm-store
+.pnpm-store/
+.prisma
 .vercel
-
-# examples
+.vscode
+/.next/
+/.pnp
+/build
+/coverage
+/node_modules
+/out/
 /pages/example.test.js
+build
+coverage
+dist
+dist/
+libquery_engine*
+node_modules
+npm-debug.log*
+pnpm-debug.log
+query-engine*
+sandbox
+tmp
+yarn-debug.log*
+yarn-error.log
+yarn-error.log*
