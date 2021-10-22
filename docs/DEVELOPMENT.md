@@ -24,7 +24,7 @@ To add an additional page simply create an additional javascript file in [/pages
 
 When the file is created consider the name to be the url route.
 
-Lets assume you make the file [pages/example.test.js](pages/example.test.js).
+Lets assume you make the file [pages/example.test.js](pages/example.test.tsx).
 
 > Here is a example of creating a page using tailwind styled components.
 > ```javascript
@@ -112,7 +112,7 @@ Replace the content of[/.gitignore](/.gitignore) with
 /coverage
 /node_modules
 /out/
-/pages/example.test.js
+/pages/example.test.tsx
 build
 coverage
 dist
@@ -296,7 +296,7 @@ export function createContext(): Context {
 Install tailwind modules
 
 ```bash
-npm install tailwindcss@latest postcss@latest autoprefixer@latest --save
+npm install --save tailwindcss@latest postcss@latest autoprefixer@latest 
 npx tailwindcss init -p
 ```
 
@@ -325,8 +325,7 @@ body {
 #### Tailwind styled-components
 Install tailwind styled-components modules
 ```bash
-npm install tailwind.macro@next --save
-npm install styled-components --save
+npm install --save tailwind.macro@next styled-components
 ```
 
 Create [/babel-plugin-macros.config.js](/babel-plugin-macros.config.js) with the following content
@@ -347,14 +346,17 @@ Create [/.babelrc](/.babelrc) with the following
 }
 ```
 
-### Typescript
-Create an empty file [/tsconfig.json](/tsconfig.json)
+Create [/pages/_app.tsx](/pages/_app.tsx) with the following
+```javascript
+import '../styles/globals.css'
 
-Add the typescript modules 
-```
-npm install --save-dev typescript @types/react @types/node ts-node
-```
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
 
+export default MyApp
+```
+<!-- 
 ### Adding Prisma database seeding
 
 Append [/package.json](/package.json) with the following
@@ -387,7 +389,7 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-```
+``` -->
 
 ## References
 
