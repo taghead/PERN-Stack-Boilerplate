@@ -4,7 +4,16 @@ The required dependencies for this project are:
 - [NodeJS](https://nodejs.org/en/blog/release/v12.13.0/) ( initialized with v12.18.3 )
 - [Docker](https://docs.docker.com/engine/install/) ( tested with Docker version 20.10.8 )
 - [Docker Compose](https://docs.docker.com/compose/install/) ( tested with docker-compose version 1.29.2 )
-- [PostgresSQL](https://www.postgresql.org/download/) ( for the [CLI](https://www.postgresql.org/docs/current/app-psql.html) accompanied with the main install )
+- [PostgresSQL](https://www.postgresql.org/download/) ( pgAdmin4 and [Command Line Tools](https://www.postgresql.org/docs/current/app-psql.html) for the bare minimum installation required. )
+- Make
+  - Make for Mac: 
+    - `brew install make` 
+  - Make for Linux: 
+    - `pacman install make` 
+    - `apt-get install make` 
+  - Make for Windows: 
+    - [GNUWIN32 Installer](http://gnuwin32.sourceforge.net/packages/make.htm) use the Complete package, except sources ( for automation )
+    - `chocho install make` refer to [Chocolatey](https://community.chocolatey.org/packages/make)
 
 Install dependencies by running `npm install` 
 
