@@ -69,71 +69,16 @@ cd next-app
 
 Generate scaffolding and boilerplate for next and react
 ```bash
-npx create-next-app@latest .
+npx create-next-app . --use-npm -e with-typescript
 ```
 
-### Tailwind
 
-Install tailwind modules
-
-```bash
-npm install tailwindcss@latest postcss@latest autoprefixer@latest --save
-npx tailwindcss init -p
-```
-
-Modify [/tailwind.config.js](/tailwind.config.js) and add
-```js
-module.exports = {
-  purge: ['./pages/**/*.jsx', './components/**/*.jsx', './pages/**/*.tsx', './components/**/*.tsx'],
-  ...
-} 
-```
-Modify [/styles/global.css](/styles/global.css) and add
-```css
-@tailwind base;
-@tailwind components;
-
-@tailwind utilities;
-
-html {
-  ...
-}
-body {
-  ...
-}
-```
-
-#### Tailwind styled-components
-Install tailwind styled-components modules
-```bash
-npm install tailwind.macro@next --save
-npm install styled-components --save
-```
-
-Create [/babel-plugin-macros.config.js](/babel-plugin-macros.config.js) with the following content
-```js
-module.exports = {
-  tailwind: {
-    config: './tailwind.config.js',
-    styled: 'styled-components/macro',
-  },
-};
-```
-
-Create [/.babelrc](/.babelrc) with the following
-```json
-{
-    "presets": ["next/babel"],
-    "plugins": ["macros"]
-}
-```
-
-### Prisma
+### Nexus with Prisma
 
 Install Prisma modules
 ```bash
-npm install @prisma/client
-npm install @prisma/cli --save-dev
+npm i --save @prisma/client @nexus/schema nexus-plugin-prisma
+npm i --save-dev @prisma
 ```
 
 Initialize Prisma
@@ -191,7 +136,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 ```
-
 #### Running PostgreSQL in Docker
 
 Create [/docker-compose.yml](/docker-compose.yml) with the following
@@ -224,7 +168,13 @@ Run `docker-compose up -d`
 ## Creating an initial schema
 
 Add the following to the bottom of [/prisma/schema.prisma](/prisma/schema.prisma)
-```js
+```typescript
+model User {
+  id    String  @default(cuid()) @id
+  name  String
+}
+```
+<!-- ```js
 model User {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -248,13 +198,70 @@ enum Role {
   USER
   ADMIN
 }
-```
+``` -->
 
 Run `npx prisma migrate dev` to migrate your Prisma schema into postgres;
 
 <!-- Run `npx prisma db pull` to turn your database schema into a Prisma schema. -->
 
 Run `npx prisma generate` to generate the Prisma Client. You can then start querying your database.
+
+
+### Tailwind
+
+Install tailwind modules
+
+```bash
+npm install tailwindcss@latest postcss@latest autoprefixer@latest --save
+npx tailwindcss init -p
+```
+
+Modify [/tailwind.config.js](/tailwind.config.js) and add
+```js
+module.exports = {
+  purge: ['./pages/**/*.jsx', './components/**/*.jsx', './pages/**/*.tsx', './components/**/*.tsx'],
+  ...
+} 
+```
+Modify [/styles/global.css](/styles/global.css) and add
+```css
+@tailwind base;
+@tailwind components;
+
+@tailwind utilities;
+
+html {
+  ...
+}
+body {
+  ...
+}
+```
+
+#### Tailwind styled-components
+Install tailwind styled-components modules
+```bash
+npm install tailwind.macro@next --save
+npm install styled-components --save
+```
+
+Create [/babel-plugin-macros.config.js](/babel-plugin-macros.config.js) with the following content
+```js
+module.exports = {
+  tailwind: {
+    config: './tailwind.config.js',
+    styled: 'styled-components/macro',
+  },
+};
+```
+
+Create [/.babelrc](/.babelrc) with the following
+```json
+{
+    "presets": ["next/babel"],
+    "plugins": ["macros"]
+}
+```
 
 ### Typescript
 Create an empty file [/tsconfig.json](/tsconfig.json)
@@ -310,3 +317,4 @@ main()
 - [Prisma - Connection URLs Options](https://pris.ly/d/connection-strings)
 - [Prisma - Api](https://www.section.io/engineering-education/api-with-prisma-and-nodejs/#:~:text=%20Prerequisites%20%201%20Step%201%3A%20Setting%20up,Step%205%3A%20Creating%20a%20Rest%20API%20More%20)
 - [PostgreSQL - Dockerhub](https://hub.docker.com/_/postgres/)
+- [Fullstack (Next, Nexus, Primsa, GraphQL) setup guide](https://github.com/hexrcs/fullstack-graphql-next-nexus-prisma)
