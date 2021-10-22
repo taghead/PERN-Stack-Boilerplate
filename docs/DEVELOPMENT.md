@@ -1,9 +1,10 @@
 # Development Guide
 
 The required dependencies for this project are:
-- NodeJS ( initialized with v12.18.3 )
-- Docker ( tested with Docker version 20.10.8 )
-- Docker Compose ( tested with docker-compose version 1.29.2 )
+- [NodeJS](https://nodejs.org/en/blog/release/v12.13.0/) ( initialized with v12.18.3 )
+- [Docker](https://docs.docker.com/engine/install/) ( tested with Docker version 20.10.8 )
+- [Docker Compose](https://docs.docker.com/compose/install/) ( tested with docker-compose version 1.29.2 )
+- [PostgresSQL](https://www.postgresql.org/download/) ( for the [CLI](https://www.postgresql.org/docs/current/app-psql.html) accompanied with the main install )
 
 Install dependencies by running `npm install` 
 
@@ -211,7 +212,34 @@ DATABASE_URL="postgresql://superawesomeuser:supersecretpass@localhost:5432/super
 
 Run `docker-compose up -d`
 
-.....Create schema stuff
+## Creating an initial schema
+
+Add the following to the bottom of [/prisma/schema.prisma](/prisma/schema.prisma)
+```js
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+  role      Role     @default(USER)
+  posts     Post[]
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  title     String   @db.VarChar(255)
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  Int?
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+```
 
 Run `npx prisma db pull` to turn your database schema into a Prisma schema.
 
@@ -227,4 +255,4 @@ Run `npx prisma generate` to generate the Prisma Client. You can then start quer
 - [Prisma - Getting Started](https://pris.ly/d/getting-started)
 - [Prisma - Schemas](https://www.prisma.io/docs/concepts/components/prisma-schema#using-environment-variables)
 - [Prisma - Connection URLs Options](https://pris.ly/d/connection-strings)
-- [PostgresQL - Dockerhub](https://hub.docker.com/_/postgres/)
+- [PostgreSQL - Dockerhub](https://hub.docker.com/_/postgres/)
