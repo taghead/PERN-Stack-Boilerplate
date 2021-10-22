@@ -256,6 +256,14 @@ Run `npx prisma migrate dev` to migrate your Prisma schema into postgres;
 
 Run `npx prisma generate` to generate the Prisma Client. You can then start querying your database.
 
+### Typescript
+Create an empty file [/tsconfig.json](/tsconfig.json)
+
+Add the typescript modules 
+```
+npm install --save-dev typescript @types/react @types/node
+```
+
 ## References
 
 
