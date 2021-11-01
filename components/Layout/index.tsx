@@ -4,8 +4,9 @@ import Header from "./Header";
 const Layout = ({ children }) => {
   return (
     <div>
-      This and all content is loaded from the index file /components/Layout/index
+      This message and the component below is loaded from the index file /components/Layout/index
       <Header />
+      This message and the page below is loaded from the index file /components/Layout/index
       {children}
     </div>
   );

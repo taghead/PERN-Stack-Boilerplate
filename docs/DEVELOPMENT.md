@@ -99,7 +99,9 @@ Remove the following files
 - [/components/ListItem.tsx](/components/Layout.tsx)
 - [/pages/about.tsx](/pages/about.tsx)
 
-#### Overwrite default app 
+#### Creating a persistence between pages
+
+Making content persistant between pages removes that hassle of maintaining the multiples of the same elements and imports. Though it is not limited to those situations only.
 
 Create [/pages/_app.tsx](/pages/_app.tsx) with the following
 ```typescript
@@ -158,7 +160,7 @@ const Header = () => {
 
 export default Header;
 ```
-
+<!-- 
 ### Nexus with Prisma
 
 Install Prisma modules
@@ -259,7 +261,7 @@ model User {
   id    String  @default(cuid()) @id
   name  String
 }
-```
+``` -->
 <!-- ```js
 model User {
   id        Int      @id @default(autoincrement())
@@ -286,10 +288,10 @@ enum Role {
 }
 ``` -->
 
-Run `npx prisma migrate dev` to migrate your Prisma schema into postgres;
+<!-- Run `npx prisma migrate dev` to migrate your Prisma schema into postgres; -->
 
 <!-- Run `npx prisma db pull` to turn your database schema into a Prisma schema. -->
-
+<!-- 
 Run `npx prisma generate` to generate the Prisma Client. You can then start querying your database.
 
 ### Integrating Graphql and Nexus schemas into Next.js
@@ -440,7 +442,7 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
-```
+``` -->
 <!-- 
 ### Adding Prisma database seeding
 
