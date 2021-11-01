@@ -1,38 +1,34 @@
-!.vscode/launch.json.default
-*.pem
-*.tsbuildinfo
-*tmp.db
-.DS_Store
-.env*
-.env.development.local
-.env.local
-.env.production.local
-.env.test.local
-.eslintcache
-.pnp.js
-.pnpm-store
-.pnpm-store/
-.prisma
-.vercel
-.vscode
-/.next/
-/.pnp
-/build
-/coverage
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
 /node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
 /out/
-/pages/example.test.js
-build
-coverage
-dist
-dist/
-libquery_engine*
-node_modules
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
 npm-debug.log*
-pnpm-debug.log
-query-engine*
-sandbox
-tmp
 yarn-debug.log*
-yarn-error.log
 yarn-error.log*
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel
