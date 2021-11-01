@@ -73,6 +73,11 @@ npx create-next-app . --use-npm -e with-typescript
 npm install --save-dev typescript@latest
 ```
 
+### Add Postcss, autoprefixer and tailwind.
+
+```bash
+npm install --save-dev autoprefixer postcss tailwindcss
+```
 
 ### Nexus with Prisma
 
