@@ -73,10 +73,90 @@ npx create-next-app . --use-npm -e with-typescript
 npm install --save-dev typescript@latest
 ```
 
-### Add Postcss, autoprefixer and tailwind.
+### Addding tailwind
 
 ```bash
-npm install --save-dev autoprefixer postcss tailwindcss
+npm install --save-dev tailwindcss@latest postcss@latest autoprefixer@latest 
+npx tailwindcss init -p
+```
+
+Create [/styles/global.css](/styles/global.css) and add
+
+```javascript
+```css
+@tailwind base;
+@tailwind components;
+
+@tailwind utilities;
+```
+
+#### Removing default components
+
+Remove the following files 
+- [/components/Layout.tsx](/components/Layout.tsx)
+- [/components/List.tsx](/components/List.tsx)
+- [/components/ListDetail.tsx](/components/ListDetail.tsx)
+- [/components/ListItem.tsx](/components/Layout.tsx)
+- [/pages/about.tsx](/pages/about.tsx)
+
+#### Overwrite default app 
+
+Create [/pages/_app.tsx](/pages/_app.tsx) with the following
+```typescript
+/*
+  This file persists content across every page.
+*/
+
+import '../styles/global.css'
+import Layout from '../components/Layout/'
+function MyApp({ Component, pageProps }) {
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
+}
+export default MyApp
+```
+
+With this setup any component registered with [/components/Layout/index.tsx](/components/Layout/index.tsx) will be loaded into every page
+
+Create [/components/Layout/index.tsx](/components/Layout/index.tsx) with the following
+```typescript
+import React from "react";
+import Header from "./Header";
+
+const Layout = ({ children }) => {
+  return (
+    <div>
+      This and all content is loaded from the index file /components/Layout/index
+      <Header />
+      {children}
+    </div>
+  );
+};
+
+export default Layout;
+```
+
+Create [/components/Layout/Header.tsx](/components/Layout/Header.tsx) with the following
+```typescript
+import React from 'react';
+import Link from 'next/link';
+
+const Header = () => {
+  return (
+    <header className="text-gray-600 body-font">
+      <div>
+        <Link href="/">
+          <a> This content is loaded from the header file /components/Layout/Header </a>
+        </Link>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
 ```
 
 ### Nexus with Prisma
