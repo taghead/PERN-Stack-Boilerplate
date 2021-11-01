@@ -82,7 +82,6 @@ npx tailwindcss init -p
 
 Create [/styles/global.css](/styles/global.css) and add
 
-```javascript
 ```css
 @tailwind base;
 @tailwind components;
