@@ -58,7 +58,7 @@ Lets assume you make the file [pages/example.test.js](pages/example.test.tsx).
 ## Initial Generation
 These commands are for documentation and do not need to be repeated
 
-### Next and React
+### Initializing Next and React with typescript.
 
 Create folder for codebase
 
@@ -89,16 +89,37 @@ Create [/styles/global.css](/styles/global.css) and add
 @tailwind utilities;
 ```
 
-#### Removing default components
 
-Remove the following files 
+### Cleanup generated files
+#### Removing generated example components, routes and page files.
+Remove the following files and folders
 - [/components/Layout.tsx](/components/Layout.tsx)
 - [/components/List.tsx](/components/List.tsx)
 - [/components/ListDetail.tsx](/components/ListDetail.tsx)
 - [/components/ListItem.tsx](/components/Layout.tsx)
 - [/pages/about.tsx](/pages/about.tsx)
+- [/pages/index.tsx](/pages/index.tsx)
+- [/pages/users](/pages/users)
+- [/pages/api/users](/pages/api/users)
 
-#### Creating a persistence between pages
+#### Removing generated example interface code.
+
+Remove or comment out the content of these files
+- [/interfaces/index.ts](/interfaces/index.ts)
+
+#### Create a basic index page
+
+Create [/pages/index.tsx](/pages/index.tsx) with the following
+
+```typescript
+const IndexPage = () => (
+  <h1>This content is loaded from the file /pages/index</h1>
+)
+
+export default IndexPage
+```
+
+### Persistence between pages
 
 Making content persistant between pages removes that hassle of maintaining the multiples of the same elements and imports. Though it is not limited to those situations only.
 
@@ -130,8 +151,9 @@ import Header from "./Header";
 const Layout = ({ children }) => {
   return (
     <div>
-      This and all content is loaded from the index file /components/Layout/index
+      This message and the component below is loaded from the index file /components/Layout/index
       <Header />
+      This message and the page below is loaded from the index file /components/Layout/index
       {children}
     </div>
   );
@@ -159,6 +181,9 @@ const Header = () => {
 
 export default Header;
 ```
+
+
+
 <!-- 
 ### Nexus with Prisma
 
