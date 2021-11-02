@@ -182,7 +182,34 @@ const Header = () => {
 export default Header;
 ```
 
+### Skeleton Data modelling
 
+Lets begin by hardcoding some data which will later be replaced with data fetched from a GraphQL API later.
+
+Starting off with a few entities User, Item and Cart.
+
+Create [/data/items.ts](/data/items.ts) with the following
+
+```typescript
+export const links = [
+  {
+    category: "Poultry",
+    description: "Garlic butter loaded crumbed chicken",
+    id: "d3123da-123da21-123adqa2w",
+    imageUrl: "",
+    title: "Chicken Kiev",
+    url: "",
+  },
+  {
+    category: "Sweets",
+    description: "Cake infused with Green Tea",
+    id: "d3123da-123da21-123adqa2w",
+    imageUrl: "",
+    title: "Green Tea Cake",
+    url: "",
+  }
+];
+```
 
 <!-- 
 ### Nexus with Prisma
