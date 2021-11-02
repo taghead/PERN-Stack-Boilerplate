@@ -191,24 +191,70 @@ Starting off with a few entities User, Item and Cart.
 Create [/data/items.ts](/data/items.ts) with the following
 
 ```typescript
-export const links = [
-  {
-    category: "Poultry",
-    description: "Garlic butter loaded crumbed chicken",
-    id: "d3123da-123da21-123adqa2w",
-    imageUrl: "",
-    title: "Chicken Kiev",
-    url: "",
-  },
-  {
-    category: "Sweets",
-    description: "Cake infused with Green Tea",
-    id: "d3123da-123da21-123adqa2w",
-    imageUrl: "",
-    title: "Green Tea Cake",
-    url: "",
-  }
-];
+export const items = [
+    {
+      category: "Poultry",
+      description: "Garlic butter loaded crumbed chicken",
+      id: "d3123da-123da21-123adqa2w",
+      imageUrl: "",
+      title: "Chicken Kiev",
+      url: ""
+    },
+    {
+      category: "Sweets",
+      description: "Cake infused with Green Tea",
+      id: "d3123da-123da21-123adqa2w",
+      imageUrl: "",
+      title: "Green Tea Cake",
+      url: ""
+    }
+  ];
+```
+
+Now lets make a component to renders those items into a list.
+
+Create [/components/ItemsList.tsx](/components/ItemsList.tsx) with the following
+```typescript
+import React from 'react';
+import { items } from '../data/items';
+
+export const ItemsList = () => {
+  return (
+    <div className="container mx-auto">
+    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+      {items.map((item) => (
+        <li key={item.id} className="shadow rounded">
+          <img className="shadow-sm" src={item.imageUrl} />
+          <div>
+            <p className="text-sm text-blue-400">{item.category}</p>
+            <p className="text-lg">{item.title}</p>
+            <p className="text-gray-500">{item.description}</p>
+            <a href={item.url} className="flex hover:text-blue-600">
+              {item.url.replace(/(^\w+:|^)\/\//, '')}
+              Link
+            </a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+  );
+};
+```
+
+Update [/pages/index.tsx](/pages/index.tsx) and add the ItemsList component by importing, encapsulating then appending the ItemsList element after H1.
+```typescript
+import { ItemsList } from '../components/ItemsList';
+
+const IndexPage = () => (
+  <div>
+    <h1>This content is loaded from the file /pages/index</h1>
+    <ItemsList></ItemsList>
+  </div>
+  
+)
+
+export default IndexPage
 ```
 
 <!-- 

@@ -1,11 +1,11 @@
-export const links = [
+export const items = [
     {
       category: "Poultry",
       description: "Garlic butter loaded crumbed chicken",
       id: "d3123da-123da21-123adqa2w",
       imageUrl: "",
       title: "Chicken Kiev",
-      url: "",
+      url: ""
     },
     {
       category: "Sweets",
@@ -13,6 +13,6 @@ export const links = [
       id: "d3123da-123da21-123adqa2w",
       imageUrl: "",
       title: "Green Tea Cake",
-      url: "",
+      url: ""
     }
   ];
