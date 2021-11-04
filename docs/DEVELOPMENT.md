@@ -259,7 +259,7 @@ export default IndexPage
 
 ### Installing and Initialize Prisma
 ```bash
-npm install --save-dev prisma 
+npm install --save-dev prisma @babel/core @prisma/client
 npx prisma init
 ```
 
@@ -381,6 +381,51 @@ enum Role {
   ADMIN
   USER
 }
+```
+
+Additioanly we will create [/prisma/seed.ts](/prisma/seed.ts) in order to populate the database with mock data.
+
+Create [/prisma/seed.ts](/prisma/seed.ts) with the following code
+```typescript
+import { PrismaClient } from '@prisma/client'
+import { data } from '../data/items'
+const prisma = new PrismaClient()
+
+async function main() {
+  await prisma.user.create({
+    data: {
+      email: 'user@email.com',
+      role: 'ADMIN'
+    }
+  })
+
+  await prisma.item.createMany({data: data})
+}
+
+main()
+  .catch(e => {
+    console.error(e)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  })
+```
+
+### Appropriate Prisma and Next
+
+Next defaults to using ESNext modules. To enable correct seeding behaviour for prisma we must use ts-node.
+
+```bash
+npm install --save-dev ts-node
+```
+
+Now lets add the following to [/package.json](/package.json)
+
+```json
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+ }
 ```
 
 ### Setting up a development database.
