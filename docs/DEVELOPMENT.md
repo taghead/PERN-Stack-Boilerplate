@@ -439,6 +439,19 @@ docker-down:
 	docker-compose down
 ```
 
+### Migration and pushing database changes
+
+Lets run that makefile we made earlier. 
+```
+make docker-up
+```
+
+Running it will basically do the following commands:
+
+-	`docker-compose up -d`
+-	`npx prisma migrate dev`
+-	`npx prisma db seed`
+
 <!-- 
 ### Nexus with Prisma
 
