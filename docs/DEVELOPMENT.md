@@ -352,6 +352,37 @@ Lets alter our [/.env](/.env) file, and add the following line
 DATABASE_URL="postgresql://superawesomeuser:supersecretpass@localhost:5432/superawesomename?schema=public"
 ```
 
+Now it is time to start thinking about our database, lets assume that we have users that want to favorite items. We have two entities to define, Users and Items.
+
+Lets append a simple schema to our [/prisma/schema.prisma](/prisma/schema.prisma) file.
+```typescript
+model User {
+  id            String    @id @default(uuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  email         String    @unique
+  role          Role      @default(USER)
+  favorites     Item[]
+}
+
+model Item {
+  id String     @id       @default(uuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  category      String
+  description   String
+  imageUrl      String?
+  title         String
+  url           String?
+  users         User[]
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+```
+
 ### Setting up a development database.
 
 There a multiple ways of setting up a database for development, and you may use what you prefer however I suggest using docker-compose and make.
