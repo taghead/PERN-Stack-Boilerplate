@@ -186,7 +186,7 @@ export default Header;
 
 Lets begin by hardcoding some data which will later be replaced with data fetched from a GraphQL API later.
 
-Starting off with a few entities User, Item and Cart.
+Lets start with some data for items.
 
 Create [/data/items.ts](/data/items.ts) with the following
 
@@ -322,6 +322,90 @@ dist/
 query-engine*
 sandbox
 tmp
+```
+
+By initializing the prisma project a folder [/prisma/](/prisma/) was created with a [/prisma/schema.prisma](/prisma/schema.prisma) file within it.
+
+For our project the file should be set to use `prisma-client-js` and the database should also be set to `postgresql`.
+
+```typescript
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+```
+
+Notice that the datasource asks for a database connection URL. The variables will be read from [/.env](/.env).
+
+For the development environment lets use the example variables in [/docs/ENVIRONMENT.md](/docs/ENVIRONMENT.md).
+
+|Environment Variable|Description|Values|Default Value|Example|Required?|
+|----|----|----|----|----|----|
+| DATABASE_URL | Points to Prisma database | URL | null | `postgresql://superawesomeuser:supersecretpass@localhost:5432/superawesomename?schema=public` | yes
+
+Lets alter our [/.env](/.env) file, and add the following line 
+```
+DATABASE_URL="postgresql://superawesomeuser:supersecretpass@localhost:5432/superawesomename?schema=public"
+```
+
+### Setting up a development database.
+
+There a multiple ways of setting up a database for development, and you may use what you prefer however I suggest using docker-compose and make.
+
+Lets begin by making [/docker-compose.yml](/docker-compose.yml)
+
+```yml
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${DATABASE_NAME}"
+      POSTGRES_USER: "${DATABASE_SUPERUSER_USER}"
+      POSTGRES_PASSWORD: "${DATABASE_SUPERUSER_PASSWORD}"
+    ports: 
+      - "5432:5432/tcp"
+      - "5432:5432/udp"
+```
+
+Notice that we use environment variables in the docker compose file, again lets use the example variables in [/docs/ENVIRONMENT.md](/docs/ENVIRONMENT.md).
+
+|Environment Variable|Description|Values|Default Value|Example|Required?|
+|----|----|----|----|----|----|
+| DATABASE_NAME | Default database name ( db service ) | STRING | null | `superawesomename` | yes
+| DATABASE_SUPERUSER_USER | Declares superusers name | STRING | null | `superawesomeuser` | yes
+| DATABASE_SUPERUSER_PASSWORD | Declares superusers password | STRING | null | `supersecretpass` | yes
+
+Lets alter our [/.env](/.env) file, and add the following line 
+```
+DATABASE_NAME="superawesomename"
+DATABASE_SUPERUSER_USER="superawesomeuser"
+DATABASE_SUPERUSER_PASSWORD="supersecretpass"
+```
+
+
+
+Next lets create the [/makefile](/makefile) to automate the process of standing and downing the database.
+
+```yml
+all:
+	timeout 0
+
+docker-up:
+	docker-compose up -d
+	timeout 4
+	npx prisma migrate dev
+	npx prisma db seed
+
+docker-down:
+	docker-compose down
 ```
 
 <!-- 
