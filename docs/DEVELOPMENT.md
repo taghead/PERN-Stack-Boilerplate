@@ -497,6 +497,15 @@ Running it will basically do the following commands:
 -	`npx prisma migrate dev`
 -	`npx prisma db seed`
 
+
+### Exploring the database
+
+Prisma provides a way to preview the database in a web gui. To access the the gui run
+
+```
+npx prisma studio
+``` 
+
 <!-- 
 ### Nexus with Prisma
 
@@ -830,3 +839,4 @@ main()
 - [Fullstack (Next, Nexus, Primsa, GraphQL) setup guide](https://github.com/hexrcs/fullstack-graphql-next-nexus-prisma)
 - [Codebase reference](https://github.com/m-abdelwahab)
 - [PERN Stack Guide](https://www.prisma.io/blog/fullstack-nextjs-graphql-prisma-oklidw1rhw)
+- [Fixing Seeding Issue](https://www.prisma.io/docs/guides/database/seed-database)
